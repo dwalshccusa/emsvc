@@ -8,7 +8,7 @@
 
 class autoform_subscriber
 {
-	public $autoform_url	= 'https://enflyer.emsvc.com/autoform_display.php';
+	public $autoform_url	= 'https://enflyer.emsvc.net/autoform_display.php';
 	public $post_query		= '';
 
 
