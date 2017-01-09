@@ -15,7 +15,7 @@ $longopts = array(
 $cli_args	= getopt($shortopts, $longopts);
 
 $subscriber = new autoform_subscriber();
-$subscriber->setAutoformUrl('http://enflyer.emsvc.com/autoform_display.php');
+$subscriber->setAutoformUrl('https://enflyer.emsvc.net/autoform_display.php');
 $subscriber->setAutoformId($cli_args['autoform_id']);
 $subscriber->setAutoformKey($cli_args['autoform_key']);
 $subscriber->addField('email', $cli_args['email']);
