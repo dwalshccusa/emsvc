@@ -5,7 +5,7 @@
  * Description: When the Enflyer Subscription plugin is enabled, all valid users who signup for your site will be immedaitely subscribed to your Enflyer memberlist via a hidden signup for that you have set up in your Enflyer account.
  * Version: 1.0.0
  * Author: Michael Cuccaro
- * Author URI: http://www.enflyer.com
+ * Author URI: http://github.com/mvcuccaro
  * License: GPL2
  */
 
