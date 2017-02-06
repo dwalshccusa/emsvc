@@ -54,6 +54,7 @@ function enflyer_s_add_admin_menu(  ) {
 }
 
 
+//thanks to http://wpsettingsapi.jeroensormani.com/ for making it easy to generate plugin settings code.
 function enflyer_s_settings_init(  ) {
 
         register_setting( 'pluginPage', 'enflyer_s_settings' );
