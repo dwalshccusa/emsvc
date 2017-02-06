@@ -4,7 +4,7 @@
  * Plugin URI: http://enflyer.emsvc.net
  * Description: This plugin subscribes new users to your enflyer mail list
  * Version: 1.0.0
- * Author: Michael Cucaro
+ * Author: Michael Cuccaro
  * Author URI: http://enflyer.emsvc.net
  * License: GPL2
  */
