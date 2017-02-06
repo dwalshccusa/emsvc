@@ -26,8 +26,6 @@ function emsvc_subscribe($arg_user_id)
         error_log('subscribe called  user id ' . $arg_user_id);
         $user_data      = get_userdata($arg_user_id);
         $email          = $user_data->data->user_email;
-        //$autoform_id  = 166;
-        //$autoform_key = 'KaxpNbO';
 
         $args =         array(
         'method' => 'POST',
