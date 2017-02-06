@@ -60,7 +60,7 @@ function emsvc_s_settings_init(  ) {
 
         add_settings_section(
                 'emsvc_s_pluginPage_section',
-                __( 'Your section description', 'wordpress' ),
+                __( 'Autoform ID and Autoform Key are required', 'wordpress' ),
                 'emsvc_s_settings_section_callback',
                 'pluginPage'
         );
