@@ -25,10 +25,10 @@ added to the memberlist of your choice.
 
 3. Use the Settings->Plugin Name screen to configure the plugin
 
-4. In the Enflyer app you will need to create a signup form (sometimes called autoforms). 
+4. In the Enflyer app you will need to create a signup form (sometimes called autoforms) at url https://enflyer.emsvc.net/autoforms.php
 
 5. At this time the wordpress plugin will only support transmission of the email address of the new user
-so you will need to create an autoform with no fields except the email field.
+so you will need to create an autoform with no fields active except the email field.
 
 6. Once you create the signup form you will be able to retrieve the autoform id and the autoform key. The memberlist associated
 with the autoform you created will be the target for new members from your wordpress registrations.
