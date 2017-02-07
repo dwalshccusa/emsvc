@@ -31,7 +31,7 @@ function enflyer_auto_subscribe($arg_user_id)
 
 
 	//the unique key for the autoform
-        $autoform_key           = isset($plugin_settings['enflyer_auto_s_text_field_1']) ? $plugin_settings['enflyer_auto_s_text_field_1']) : null;   //the validation key of the enflyer autoform
+        $autoform_key           = isset($plugin_settings['enflyer_auto_s_text_field_1']) ? $plugin_settings['enflyer_auto_s_text_field_1'] : null;   //the validation key of the enflyer autoform
  
 
 	error_log('plugin_settings - autoform_id: '     . $autoform_id);
