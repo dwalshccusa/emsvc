@@ -5,7 +5,7 @@
  * Description: When the Enflyer Subscription plugin is enabled, all valid users who signup for your site will be immedaitely subscribed to your Enflyer memberlist via a hidden signup for that you have set up in your Enflyer account.
  * Version: 1.0.0
  * Author: Michael Cuccaro
- * Author URI: http://github.com/mvcuccaro
+ * Author URI: https://github.com/mvcuccaro
  * License: GPL2
  */
 
@@ -13,36 +13,59 @@ add_action('wpmu_new_user', enflyer_subscribe);
 
 function enflyer_subscribe($arg_user_id)
 {
-        $plugin_settings        = get_option('enflyer_s_settings');
-        error_log(print_r($plugin_settings, true));
-        $autoform_id            = $plugin_settings['enflyer_s_text_field_0'];
-        $autoform_key           = $plugin_settings['enflyer_s_text_field_1'];
+        $url    = 'https://enflyer.emsvc.net/autoform_display.php'; //the location of the enflyer submission form
 
+        /**
+        * retrieve plugin settings
+        */
+        $plugin_settings        = get_option('enflyer_s_settings');
+        $autoform_id            = $plugin_settings['enflyer_s_text_field_0'];   //the unique id of the enflyer autoform
+        $autoform_key           = $plugin_settings['enflyer_s_text_field_1'];   //the validation key of the enflyer autoform
         error_log('plugin_settings - autoform_id: '     . $autoform_id);
         error_log('plugin_settings - autoform_key: '    . $autoform_key);
 
-        $url     = 'http://winflyer.enflyer.com/autoform_display.php';
-
-        error_log('subscribe called  user id ' . $arg_user_id);
+        /**
+        * retrieve the user email from the wordpress user record
+        */
         $user_data      = get_userdata($arg_user_id);
         $email          = $user_data->data->user_email;
-        //$autoform_id  = 166;
-        //$autoform_key = 'KaxpNbO';
 
+        /**
+        * submit data to enflyer autoform
+        */
         $args =         array(
-        'method' => 'POST',
-        'timeout' => 10,
-        'redirection' => 5,
-        'httpversion' => '1.0',
-        'blocking' => true,
-        'headers' => array(),
-        'body' => array( 'fields[autoform_id]' => $autoform_id, 'fields[af_key]' => $autoform_key, 'action' => 'add', 'fields[email]' => $email),
-        'cookies' => array()
-        );
+                                'method' => 'POST',
+                                'timeout' => 20,
+                                'redirection' => 5,
+                                'httpversion' => '1.0',
+                                'blocking' => true,
+                                'headers' => array(),
+                                'body' => array( 'fields[autoform_id]' => $autoform_id, 'fields[af_key]' => $autoform_key, 'action' => 'add', 'fields[email]' => $email),
+                                'cookies' => array()
+                        );
 
         $response = wp_remote_post( $url, $args);
+
+        /**
+        * handle response
+        */
+        if( is_wp_error($response) )
+        {
+                $error_message = $response->get_error_message();
+                error_log('enflyer subscribe - Something went wrong: ' .  $error_message);
+                error_log('Response: ' . print_r($response, true));
+        }
+        else
+        {
+                error_log('enflyer subscribe success');
+        }
 }
 
+
+/**
+* Begin Plugin Settings
+* thanks to http://wpsettingsapi.jeroensormani.com/ for making it easy to generate plugin settings code.
+*/
 add_action( 'admin_menu', 'enflyer_s_add_admin_menu' );
 add_action( 'admin_init', 'enflyer_s_settings_init' );
 
@@ -53,8 +76,6 @@ function enflyer_s_add_admin_menu(  ) {
 
 }
 
-
-//thanks to http://wpsettingsapi.jeroensormani.com/ for making it easy to generate plugin settings code.
 function enflyer_s_settings_init(  ) {
 
         register_setting( 'pluginPage', 'enflyer_s_settings' );
