@@ -9,7 +9,7 @@
  * License: GPL2
  */
 
-add_action('wpmu_new_user', enflyer_auto_subscribe);
+add_action('wpmu_new_user', 'enflyer_auto_subscribe');
 
 function enflyer_auto_subscribe($arg_user_id)
 {
@@ -92,7 +92,7 @@ add_action( 'admin_init', 'enflyer_auto_s_settings_init' );
 
 function enflyer_auto_s_add_admin_menu(  ) {
 
-        add_options_page( 'Enflyer Auto Subscribe', 'Enflyer Auto Subscribe', 'manage_options', 'enflyer_auto_subscribe', 'enflyer_auto_soptions_page' );
+        add_options_page( 'Enflyer Auto Subscribe', 'Enflyer Auto Subscribe', 'manage_options', 'enflyer_auto_subscribe', 'enflyer_auto_s_options_page' );
 }
 
 function enflyer_auto_s_settings_init(  ) {
