@@ -19,10 +19,30 @@ function enflyer_auto_subscribe($arg_user_id)
         * retrieve plugin settings
         */
         $plugin_settings        = get_option('enflyer_auto_s_settings');
-        $autoform_id            = $plugin_settings['enflyer_auto_s_text_field_0'];   //the unique id of the enflyer autoform
-        $autoform_key           = $plugin_settings['enflyer_auto_s_text_field_1'];   //the validation key of the enflyer autoform
-        error_log('plugin_settings - autoform_id: '     . $autoform_id);
+	
+	if( !$plugin_settings )
+	{
+		error_log('Plugin settings not found');
+		return 0;
+	}
+
+	//the unique id of the autoform
+        $autoform_id            = isset($plugin_settings['enflyer_auto_s_text_field_0']) && (int)$plugin_settings['enflyer_auto_s_text_field_0'] > 0 ? (int)$plugin_settings['enflyer_auto_s_text_field_0'] ?  $plugin_settings['enflyer_auto_s_text_field_0'] : 0;
+
+
+	//the unique key for the autoform
+        $autoform_key           = isset($plugin_settings['enflyer_auto_s_text_field_1']) ? $plugin_settings['enflyer_auto_s_text_field_1']) : null;   //the validation key of the enflyer autoform
+ 
+
+	error_log('plugin_settings - autoform_id: '     . $autoform_id);
         error_log('plugin_settings - autoform_key: '    . $autoform_key);
+
+	if( !$autoform_id )
+	{
+		error_log('autoform_id must be an int greater than 0');
+		return 0;
+	}
+
 
         /**
         * retrieve the user email from the wordpress user record
