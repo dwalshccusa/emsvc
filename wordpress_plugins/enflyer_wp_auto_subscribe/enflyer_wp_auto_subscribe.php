@@ -109,7 +109,7 @@ function enflyer_auto_s_settings_init(  ) {
         add_settings_field(
                 'enflyer_auto_s_text_field_0',
                 __( 'autoform id', 'wordpress' ),
-                'enflyer_auto_stext_field_0_render',
+                'enflyer_auto_s_text_field_0_render',
                 'pluginPage',
                 'enflyer_auto_s_pluginPage_section'
         );
