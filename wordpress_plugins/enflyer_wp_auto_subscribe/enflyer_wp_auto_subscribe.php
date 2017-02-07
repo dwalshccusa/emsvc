@@ -27,7 +27,7 @@ function enflyer_auto_subscribe($arg_user_id)
 	}
 
 	//the unique id of the autoform
-        $autoform_id            = isset($plugin_settings['enflyer_auto_s_text_field_0']) && (int)$plugin_settings['enflyer_auto_s_text_field_0'] > 0 ? (int)$plugin_settings['enflyer_auto_s_text_field_0'] :  $plugin_settings['enflyer_auto_s_text_field_0'] : 0;
+        $autoform_id            = isset($plugin_settings['enflyer_auto_s_text_field_0']) && (int)$plugin_settings['enflyer_auto_s_text_field_0'] > 0 ? (int)$plugin_settings['enflyer_auto_s_text_field_0'] : 0;
 
 
 	//the unique key for the autoform
