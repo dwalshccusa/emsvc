@@ -21,7 +21,7 @@ function enflyer_drupal_auto_subscribe_help($path, $arg)
         switch($path)
         {
                 case "admin/help#enflyer_drupal_auto_subscribe":
-                        watchdog('system', 'enflyer help called', $variables = array(), $severity = WATCHDOG_NOTICE, $link = NULL);
+                        watchdog('enflyer_as', 'enflyer help called', $variables = array(), $severity = WATCHDOG_NOTICE, $link = NULL);
                         return '' . t("Auto subscribe new users to an Enflyer memberlist") . '';
                         break;
         }
@@ -37,6 +37,16 @@ function enflyer_drupal_auto_subscribe_user_insert($edit, $account, $category)
         $autoform_key   = variable_get('enflyer_drupal_auto_subscribe_autoform_key', '');
         $email  = $account->mail;
 
+	if( empty($autoform_id) )
+	{
+		myWatchDog('You must provide an autoform id'); return 0;		
+	}
+
+	if( empty($autoform_key) )
+	{
+		myWatchDog('you must provide an autoform key'); return 0;
+	}
+
         $data_construct = array('action' => 'add', 'fields[autoform_id]' => $autoform_id, 'fields[af_key]' => $autoform_key, 'fields[email]' => $email);
         $encoded_data   = drupal_http_build_query($data_construct);
 
@@ -46,7 +56,15 @@ function enflyer_drupal_auto_subscribe_user_insert($edit, $account, $category)
                 'data'          => $encoded_data,
                 'headers' => array('Content-Type' => 'application/x-www-form-urlencoded')
         );
-        drupal_http_request($url, $request_options);
+        $response = drupal_http_request($url, $request_options);
+	if( isset($response->error) )
+	{
+		myWatchDog('error: ' . $response->error);
+	}
+	else
+	{
+		myWatchDog('success! ');
+	}
 }
 
 function _admin() {
@@ -116,5 +134,5 @@ function enflyer_drupal_auto_subscribe_form($form, &$form_state) {
 */
 function myWatchDog($arg_message)
 {
-        watchdog('system', $arg_message, $variables = array(), $severity = WATCHDOG_NOTICE, $link = NULL);
+        watchdog('enflyer_as', $arg_message, $variables = array(), $severity = WATCHDOG_NOTICE, $link = NULL);
 }
