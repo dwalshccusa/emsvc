@@ -1,0 +1,6 @@
+name = Enflyer Drupal Auto Subscribe
+description = Auto subscribe new drupal registrations to an enflyer member list.
+core = 7.x
+package = My Modules
+
+configure = admin/config/content/enflyer_dupal_auto_subscribe
