@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		function addTextMessageContact(){
+			let username = $('#username').val();
+			let password = $('#password').val();
+			let auth_combo =  btoa(username + ":" + password);
+			console.log(auth_combo);
+
+			//
+			let contact = {
+				phone: $('#phone').val(),
+				first_name: $('#first_name').val(),
+				last_name: $('#last_name').val(),
+				email: $('#email').val()
+			}
+
+			let payload = {
+				debug:0,
+				service:"text_message_contact",
+				action:"add",
+				contact_list_id: $('#contact_list_id').val(),
+				contact: contact
+			}
+
+			let payload_string = JSON.stringify(payload);
+
+			console.log(payload_string);
+
+			let request_object = {
+				type:"POST",
+				method: "POST",
+				url: 'http://winflyer.emsvc.com/api.php',
+				dataType:'json',
+				contentType: "application/json",
+				data:payload_string,
+				headers:{
+					"Authorization": "Basic " + auth_combo
+				}
+			}
+
+			$.ajax(request_object).always(function(result){
+				console.log(result);
+			})
+			.fail(function(error){
+				console.log(error);
+			})
+			
+		}
+	</script>
+</head>
+<body>
+	<input id="phone" placeholder="phone"></input><br>
+	<input id="first_name" placeholder="first name"></input><br>
+	<input id="last_name" placeholder="last name"></input><br>
+	<input id="email" placeholder="email"></input><br>
+	<input id="contact_list_id" placeholder="contact_list_id"></input><br>
+	<input id="username" placeholder="user"></input><br>
+	<input id="password" placeholder="password"></input><br>
+	<button onClick="addTextMessageContact()">Test</button>
+</body>
+</html>
